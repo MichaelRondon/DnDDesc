@@ -1,0 +1,15 @@
+com.mfra.dnd.character
+com.mfra.dnd.checker
+com.mfra.dnd.checker.checkerManager
+com.mfra.dnd.checker.checkerManager.model
+com.mfra.dnd.difficultyclass
+com.mfra.dnd.dndclass
+com.mfra.dnd.factory
+com.mfra.dnd.feat
+com.mfra.dnd.language
+com.mfra.dnd.manager
+com.mfra.dnd.misc
+com.mfra.dnd.race
+com.mfra.dnd.util
+com.mfra.dnd.weapon
+com.mfra.equipment
