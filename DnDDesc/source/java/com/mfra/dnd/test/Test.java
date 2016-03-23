@@ -111,7 +111,7 @@ public class Test {
 			declaredMethod.setAccessible(true);
 			@SuppressWarnings("unused")
 			BigDecimal bigDecimal = (BigDecimal) declaredMethod.invoke(ADnDClass.Level.TWENTY);
-			Assert.assertEquals((new BigDecimal(11.5)).doubleValue(), 11.5,0.1);
+			Assert.assertEquals((new BigDecimal(11.5)).doubleValue(), 11.5, 0.1);
 
 			DnDCharacter testCharacter = getTestCharacter(ADnDClass.Level.TWENTY);
 			testCharacter.checkAction(AttackBonus.AttackName.MELEE_ATTACK);

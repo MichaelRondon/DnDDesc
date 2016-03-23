@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import com.mfra.dnd.checker.ACheckeable;
 import com.mfra.dnd.checker.Ability;
+import com.mfra.dnd.checker.AbilityManager;
 import com.mfra.dnd.checker.Ability.AbilityName;
 import com.mfra.dnd.checker.AttackBonus;
 import com.mfra.dnd.checker.SavingThrows;
@@ -22,7 +23,6 @@ import com.mfra.dnd.feat.AFeat;
 import com.mfra.dnd.language.Language;
 import com.mfra.dnd.language.LanguagesManager;
 import com.mfra.dnd.language.LanguagesManager.LanguagesManagerName;
-import com.mfra.dnd.manager.AbilityManager;
 import com.mfra.dnd.manager.AttackBonusManager;
 import com.mfra.dnd.manager.SavingThrowsManager;
 import com.mfra.dnd.manager.SkillManager;
@@ -30,6 +30,7 @@ import com.mfra.dnd.misc.Misc;
 import com.mfra.dnd.race.ACharacterElement;
 import com.mfra.dnd.race.ARace;
 import com.mfra.dnd.util.CoinsBuilder;
+import com.mfra.dnd.util.DescProperty;
 import com.mfra.dnd.util.DnDUtil;
 import com.mfra.exceptions.GeneralException;
 
@@ -65,12 +66,14 @@ public class DnDCharacter implements Cloneable, IDnDCharacter {
 	 */
 	private DnDCharacter(String name) {
 		this.dndFactory = new DnDFactory(checkProperties, descProperties);
-		this.abilityManager = new AbilityManager(this.checkProperties);
+		this.abilityManager = new AbilityManager(this.checkProperties, this.descProperties);
 		this.skillManager = new SkillManager(this.checkProperties);
 		this.abilityManager.init();
 		this.descProperties.put(Skill.SKILL_POINTS, 0);
 		this.descProperties.put(Misc.CHARACTER_NAME.name(), name);
+		this.descProperties.put(DescProperty.AVAILABLE_ABILITY_POINTS.name(), 0);
 		this.actionManager = new ActionManager(checkProperties, descProperties);
+		this.descProperties.put(DescProperty.CREATED.toString(), false);
 	}
 
 	/**
@@ -365,5 +368,10 @@ public class DnDCharacter implements Cloneable, IDnDCharacter {
 	@Override
 	public void useSkillPoints(int points, Skill.SkillName skillName) {
 		this.skillManager.usePoints(points, skillName, this.descProperties);
+	}
+
+	@Override
+	public void create() {
+		this.descProperties.put(DescProperty.CREATED.toString(), true);
 	}
 }

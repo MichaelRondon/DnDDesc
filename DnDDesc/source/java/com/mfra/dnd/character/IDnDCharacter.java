@@ -134,4 +134,6 @@ public interface IDnDCharacter extends Serializable {
 	 * @param skillName
 	 */
 	public void useSkillPoints(int points, Skill.SkillName skillName);
+	
+	public void create();
 }
