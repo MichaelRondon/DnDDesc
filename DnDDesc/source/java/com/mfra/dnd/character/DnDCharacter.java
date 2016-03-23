@@ -29,9 +29,11 @@ import com.mfra.dnd.manager.SkillManager;
 import com.mfra.dnd.misc.Misc;
 import com.mfra.dnd.race.ACharacterElement;
 import com.mfra.dnd.race.ARace;
+import com.mfra.dnd.util.BasicData;
 import com.mfra.dnd.util.CoinsBuilder;
 import com.mfra.dnd.util.DescProperty;
 import com.mfra.dnd.util.DnDUtil;
+import com.mfra.dnd.util.IBasicData;
 import com.mfra.exceptions.GeneralException;
 
 /**
@@ -57,6 +59,7 @@ public class DnDCharacter implements Cloneable, IDnDCharacter {
 	private AttackBonusManager attackBonusManager;
 	private HashMap<Enum<?>, ACheckeable> checkProperties = new HashMap<Enum<?>, ACheckeable>();
 	private HashMap<String, Object> descProperties = new HashMap<String, Object>();
+	private IBasicData iBasicData = new BasicData();
 	private final DnDFactory dndFactory;
 	private SavingThrowsManager savingThrowsManager;
 	private SkillManager skillManager;
@@ -65,9 +68,14 @@ public class DnDCharacter implements Cloneable, IDnDCharacter {
 	 * @param name
 	 */
 	private DnDCharacter(String name) {
+		iBasicData = new BasicData(checkProperties, descProperties);
+				
+				
+				
+				
 		this.dndFactory = new DnDFactory(checkProperties, descProperties);
-		this.abilityManager = new AbilityManager(this.checkProperties, this.descProperties);
-		this.skillManager = new SkillManager(this.checkProperties);
+		this.abilityManager = new AbilityManager(iBasicData);
+		this.skillManager = new SkillManager(iBasicData);
 		this.abilityManager.init();
 		this.descProperties.put(Skill.SKILL_POINTS, 0);
 		this.descProperties.put(Misc.CHARACTER_NAME.name(), name);
@@ -212,9 +220,9 @@ public class DnDCharacter implements Cloneable, IDnDCharacter {
 		this.setCharacterElement(Coins.class, Equipment.COINS);
 		this.setCharacterElement(HitPoints.class, ADifficultyClass.DCKeyName.HIT_POINTS);
 		this.setCharacterElement(ArmorClass.class, ADifficultyClass.DCKeyName.ARMOR_CLASS);
-		this.attackBonusManager = new AttackBonusManager(this.checkProperties, this.descProperties);
+		this.attackBonusManager = new AttackBonusManager(iBasicData);
 		this.attackBonusManager.init();
-		this.savingThrowsManager = new SavingThrowsManager(this.checkProperties, this.descProperties);
+		this.savingThrowsManager = new SavingThrowsManager(iBasicData);
 		this.savingThrowsManager.init();
 		this.setCharacterElement(LanguagesManager.class, LanguagesManager.LanguagesManagerName.LANGUAGES);
 	}
