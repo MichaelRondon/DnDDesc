@@ -1,7 +1,9 @@
 package com.mfra.dnd.character;
 
 import java.io.Serializable;
+import java.util.List;
 
+import com.mfra.dnd.checker.Ability;
 import com.mfra.dnd.checker.Skill;
 import com.mfra.dnd.checker.checkerManager.Action;
 import com.mfra.dnd.dndclass.ADnDClass;
@@ -43,6 +45,8 @@ public interface IDnDCharacter extends Serializable {
     public void checkAction(Enum<?> checkeableName, Integer difficultyClass);
 
     public void create();
+
+    public List<Ability> getAbilities();
 
     /**
      * @return Name

@@ -48,9 +48,8 @@ public class CharacterManager {
         humanCharacter.addLanguage(Language.DRUIDIC);
         humanCharacter.showDescProperties();
 
-        CharacterSerializer characterSerializer = new CharacterSerializer(
-                getElfTestCharacter());
-        characterSerializer.process();
+        CharacterSerializer characterSerializer = new CharacterSerializer();
+        characterSerializer.process(getElfTestCharacter());
         IDnDCharacter elfCharacter = characterSerializer
                 .getCharacter("ElfTest1");
         elfCharacter.addCoins(elfCharacter.getRamdomCoins());

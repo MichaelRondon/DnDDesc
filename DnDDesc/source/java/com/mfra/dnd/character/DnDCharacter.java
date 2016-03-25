@@ -1,6 +1,7 @@
 package com.mfra.dnd.character;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -91,8 +92,8 @@ public class DnDCharacter implements Cloneable, IDnDCharacter {
      */
     @Override
     public void addBonusLanguage(Language language) {
-        iBasicData.validIsClassSet();
-        iBasicData.validIsRaceSet();
+        this.iBasicData.validIsClassSet();
+        this.iBasicData.validIsRaceSet();
         LanguagesManager languagesManager = (LanguagesManager) this.descProperties
                 .get(LanguagesManagerName.LANGUAGES.toString());
         languagesManager.addBonusLanguage(language);
@@ -170,6 +171,16 @@ public class DnDCharacter implements Cloneable, IDnDCharacter {
      * Combat for details.)
      */
     public void doSomeThing() {
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public List<Ability> getAbilities() {
+        List<Ability> properties = this.abilityManager.getProperties(
+                Ability.AbilityName.values(), Ability.class);
+        return properties;
     }
 
     /**
