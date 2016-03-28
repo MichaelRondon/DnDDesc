@@ -115,7 +115,6 @@ public class Test {
 		try {
 			declaredField = DnDCharacter.class.getDeclaredField("iBasicData");
 			declaredField.setAccessible(true);
-			@SuppressWarnings("unchecked")
 			IBasicData iBasicData = (IBasicData) declaredField.get(testCharacter);
 			((ADnDClass) iBasicData.getDescProperty(ADnDClass.KEY_NAME)).setLevel(level);
 		} catch (NoSuchFieldException e) {
