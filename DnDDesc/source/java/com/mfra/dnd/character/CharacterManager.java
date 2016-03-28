@@ -14,78 +14,77 @@ import com.mfra.dnd.util.DnDUtil;
  */
 public class CharacterManager {
 
-    public static IDnDCharacter getElfTestCharacter() {
-        IDnDCharacter character = DnDCharacter.getCharacter("ElfTest1");
-        character.setCharisma(7);
-        character.setWisdom(10);
-        character.setStrength(11);
-        character.setConstitution(16);
-        character.setDexterity(16);
-        character.setIntelligence(17);
-        character.setRace(ARace.RaceName.ELF);
-        character.setClass(DnDClassName.DRUID);
-        character.useSkillPoints(3, Skill.SkillName.APPRAISE);
-        character.setFeat(AFeat.FeatName.ACROBATIC);
-        character.addBonusLanguage(Language.SYLVAN);
-        return character;
-    }
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		DnDUtil.getInstance().generateAbilityRamdomScores(true);
+		DnDUtil.getInstance().generateAbilityRamdomScores(false);
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        DnDUtil.getInstance().generateAbilityRamdomScores(true);
-        DnDUtil.getInstance().generateAbilityRamdomScores(false);
+		IDnDCharacter halfOrcTestCharacter = getHalfOrcTestCharacter();
+		halfOrcTestCharacter.showAbilities();
+		halfOrcTestCharacter.showSkills();
+		halfOrcTestCharacter.showDescProperties();
 
-        IDnDCharacter halfOrcTestCharacter = getHalfOrcTestCharacter();
-        halfOrcTestCharacter.showAbilities();
-        halfOrcTestCharacter.showSkills();
-        halfOrcTestCharacter.showDescProperties();
+		IDnDCharacter humanCharacter = getHumanTestCharacter();
+		humanCharacter.showAbilities();
+		humanCharacter.showSkills();
+		humanCharacter.addLanguage(Language.DRUIDIC);
+		humanCharacter.showDescProperties();
 
-        IDnDCharacter humanCharacter = getHumanTestCharacter();
-        humanCharacter.showAbilities();
-        humanCharacter.showSkills();
-        humanCharacter.addLanguage(Language.DRUIDIC);
-        humanCharacter.showDescProperties();
+		CharacterSerializer characterSerializer = new CharacterSerializer();
+		characterSerializer.process(getElfTestCharacter());
+		IDnDCharacter elfCharacter = characterSerializer.getCharacter("ElfTest1");
+		elfCharacter.addCoins(elfCharacter.getRamdomCoins());
+		elfCharacter.showAbilities();
+		elfCharacter.showSkills();
+		elfCharacter.showAttacks();
+		elfCharacter.showSavingThrows();
+		elfCharacter.showDescProperties();
+		elfCharacter.checkAction(Action.INICIATIVE);
+		elfCharacter.checkAction(AttackBonus.AttackName.RANGED_ATTACK);
+		elfCharacter.checkAction(AttackBonus.AttackName.MELEE_ATTACK);
+	}
 
-        CharacterSerializer characterSerializer = new CharacterSerializer();
-        characterSerializer.process(getElfTestCharacter());
-        IDnDCharacter elfCharacter = characterSerializer
-                .getCharacter("ElfTest1");
-        elfCharacter.addCoins(elfCharacter.getRamdomCoins());
-        elfCharacter.showAbilities();
-        elfCharacter.showSkills();
-        elfCharacter.showAttacks();
-        elfCharacter.showSavingThrows();
-        elfCharacter.showDescProperties();
-        elfCharacter.checkAction(Action.INICIATIVE);
-        elfCharacter.checkAction(AttackBonus.AttackName.RANGED_ATTACK);
-        elfCharacter.checkAction(AttackBonus.AttackName.MELEE_ATTACK);
-    }
+	private static IDnDCharacter getElfTestCharacter() {
+		IDnDCharacter character = DnDCharacter.getCharacter("ElfTest1");
+		character.setCharisma(7);
+		character.setWisdom(10);
+		character.setStrength(11);
+		character.setConstitution(16);
+		character.setDexterity(16);
+		character.setIntelligence(17);
+		character.setRace(ARace.RaceName.ELF);
+		character.setClass(DnDClassName.DRUID);
+		character.useSkillPoints(3, Skill.SkillName.APPRAISE);
+		character.setFeat(AFeat.FeatName.ACROBATIC);
+		character.addBonusLanguage(Language.SYLVAN);
+		return character;
+	}
 
-    private static IDnDCharacter getHalfOrcTestCharacter() {
-        IDnDCharacter character = DnDCharacter.getCharacter("HumanTest1");
-        character.setCharisma(7);
-        character.setWisdom(10);
-        character.setStrength(11);
-        character.setConstitution(16);
-        character.setDexterity(16);
-        character.setIntelligence(3);
-        character.setRace(ARace.RaceName.HALF_ORC);
-        character.setClass(DnDClassName.DRUID);
-        return character;
-    }
+	private static IDnDCharacter getHalfOrcTestCharacter() {
+		IDnDCharacter character = DnDCharacter.getCharacter("HumanTest1");
+		character.setCharisma(7);
+		character.setWisdom(10);
+		character.setStrength(11);
+		character.setConstitution(16);
+		character.setDexterity(16);
+		character.setIntelligence(3);
+		character.setRace(ARace.RaceName.HALF_ORC);
+		character.setClass(DnDClassName.DRUID);
+		return character;
+	}
 
-    private static IDnDCharacter getHumanTestCharacter() {
-        IDnDCharacter character = DnDCharacter.getCharacter("HalfOrcTest1");
-        character.setCharisma(7);
-        character.setWisdom(10);
-        character.setStrength(11);
-        character.setConstitution(16);
-        character.setDexterity(16);
-        character.setIntelligence(10);
-        character.setRace(ARace.RaceName.HUMAN);
-        character.setClass(DnDClassName.DRUID);
-        return character;
-    }
+	private static IDnDCharacter getHumanTestCharacter() {
+		IDnDCharacter character = DnDCharacter.getCharacter("HalfOrcTest1");
+		character.setCharisma(7);
+		character.setWisdom(10);
+		character.setStrength(11);
+		character.setConstitution(16);
+		character.setDexterity(16);
+		character.setIntelligence(10);
+		character.setRace(ARace.RaceName.HUMAN);
+		character.setClass(DnDClassName.DRUID);
+		return character;
+	}
 }
